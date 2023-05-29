@@ -12,7 +12,7 @@ import {
 import { fetchContacts } from '../../redux/contacts/operations';
 import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
-import Message from 'components/Message';
+import Message from '../Message/Message';
 
 import { ToastWrapper } from '../ToastContainer/ToastContainer';
 
