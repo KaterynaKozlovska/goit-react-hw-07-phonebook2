@@ -12,7 +12,9 @@ import {
 import { fetchContacts } from '../../redux/contacts/operations';
 import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
-import { ToastWrapper } from 'components/ToastContainer/ToastContainer';
+import Message from 'components/Message';
+
+import { ToastWrapper } from '../ToastContainer/ToastContainer';
 
 function App() {
   const contactsItems = useSelector(selectContactsItems);
@@ -38,8 +40,8 @@ function App() {
   return (
     <div className={css.container}>
       {isLoading && <TailSpin color="navy" />}
+      <h1 className={css.title}>Phonebook</h1>
       <section className={css.section}>
-        <h1 className={css.title}>Phonebook</h1>
         <ContactForm />
       </section>
       <section className={css.section}>
@@ -50,7 +52,7 @@ function App() {
             <ContactList />
           </>
         ) : (
-          toast.error('There are some problems! Try again later.')
+          <Message message="There are no contacts in your Phonebook. Please add your first contact!" />
         )}
       </section>
       <ToastWrapper />
