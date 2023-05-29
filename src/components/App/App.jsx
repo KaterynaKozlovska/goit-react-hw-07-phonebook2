@@ -12,6 +12,7 @@ import {
 import { fetchContacts } from '../../redux/contacts/operations';
 import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
+import { ToastWrapper } from 'components/ToastContainer/ToastContainer';
 
 function App() {
   const contactsItems = useSelector(selectContactsItems);
@@ -52,6 +53,7 @@ function App() {
           toast.error('There are some problems! Try again later.')
         )}
       </section>
+      <ToastWrapper />
     </div>
   );
 }
