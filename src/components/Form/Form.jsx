@@ -20,14 +20,20 @@ const schema = yup.object().shape({
     .trim()
     .max(64)
     .required('Name is required')
-    .matches(nameRegex),
+    .matches(nameRegex, {
+      message:
+        "Invalid name. Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan.",
+    }),
 
   number: yup
     .string()
     .trim()
     .required('Number is required')
     .min(5)
-    .matches(numberRegex),
+    .matches(numberRegex, {
+      message:
+        'Invalid number. Phone number must be digits and can contain spaces, dashes, parentheses and can start with +.',
+    }),
 });
 
 export const ContactForm = () => {
@@ -69,8 +75,8 @@ export const ContactForm = () => {
 
   return (
     <form className={css.form} onSubmit={handleSubmit(addNewContact)}>
-      <div className={css.field}>
-        <label className={css.label}>Name</label>
+      <label className={css.label}>
+        Name
         <input
           className={css.input}
           type="text"
@@ -78,10 +84,11 @@ export const ContactForm = () => {
           autoComplete="off"
           {...register('name')}
         />
-        {errors.name}
-      </div>
-      <div className={css.field}>
-        <label className={css.label}>Number</label>
+        {errors.name && <div>{errors.name?.message}</div>}
+      </label>
+
+      <label className={css.label}>
+        Number
         <input
           className={css.input}
           type="tel"
@@ -89,8 +96,8 @@ export const ContactForm = () => {
           autoComplete="off"
           {...register('number')}
         />
-        {errors.number}
-      </div>
+        {errors.number && <div>{errors.number?.message}</div>}
+      </label>
       <button className={css.btn__submit} type="submit">
         Add contact
       </button>
